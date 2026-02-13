@@ -1,4 +1,4 @@
-# youtube_clone
+# Youtube Clone
 
 A youtube clone
 
