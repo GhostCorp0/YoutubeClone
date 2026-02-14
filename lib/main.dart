@@ -39,14 +39,16 @@ class MyApp extends StatelessWidget {
                 .snapshots(),
             builder: (context, snapshot) {
               final user = FirebaseAuth.instance.currentUser;
-              if (!snapshot.hasData || snapshot.data!.exists) {
+              if (!snapshot.hasData || snapshot.connectionState == ConnectionState.waiting) {
+                return Loader();
+              }
+              // New user: no Firestore doc yet → username page. Returning user: doc exists → home.
+              if (!snapshot.data!.exists) {
                 return UsernamePage(
                   displayName: user!.displayName!,
                   profilePic: user.photoURL!,
                   email: user.email!,
                 );
-              }else if(snapshot.connectionState == ConnectionState.waiting){
-                return Loader();
               }
               return HomePage();
             },
