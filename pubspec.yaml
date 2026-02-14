@@ -11,9 +11,41 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.8
+  bottom_sheet:
+  cached_network_image:
+  cloud_firestore:
+  cupertino_icons:
+  firebase_auth:
+  firebase_core:
+  firebase_storage:
+  flutter_riverpod:
+  font_awesome_flutter:
+  fraction:
+  google_sign_in:
+  image_picker:
+  intl:
+  path:
+  path_provider:
+  permission_handler:
+  timeago:
+  uuid:
+  video_editor:
+  video_player:
+  flutter_staggered_grid_view:
+  google_nav_bar:
+  freezed_annotation:
+  ffmpeg_kit_flutter:
+    path: /Users/user/Desktop/Flutter/ffmpeg_kit/ffmpeg-kit/flutter/flutter
+
+dependency_overrides:
+  ffmpeg_kit_flutter_platform_interface:
+    path: /Users/user/Desktop/Flutter/ffmpeg_kit/ffmpeg-kit/flutter/flutter_platform_interface
 
 dev_dependencies:
+  auto_route_generator: ^7.3.1
+  build_runner: ^2.4.6
+  freezed:
+  json_serializable:
   flutter_test:
     sdk: flutter
 
@@ -23,8 +55,9 @@ flutter:
 
   uses-material-design: true
 
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
+    - assets/icons/
 
   # fonts:
   #   - family: Schyler

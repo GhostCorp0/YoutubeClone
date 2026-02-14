@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1015366760091",
+    "project_id": "clone-1ea2a",
+    "storage_bucket": "clone-1ea2a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015366760091:android:13222ba8a1e50137fd383e",
+        "android_client_info": {
+          "package_name": "com.ghostcorporation.youtube_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015366760091-16ntspd6n14t9j3u1t8gajv0kv9kkh15.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnC1lrLZraXekxtYRN7VgyMHwyok2SGWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015366760091-16ntspd6n14t9j3u1t8gajv0kv9kkh15.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1015366760091-jms82f72ts72q4lmirhsvhi6bjompq8h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ghostcorporation.youtubeClone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
