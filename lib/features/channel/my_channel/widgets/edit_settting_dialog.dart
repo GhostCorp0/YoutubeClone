@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+
+class SettingsDialog extends StatefulWidget {
+  final String identifier;
+  final Function(String channelName)? onSave;
+
+  const SettingsDialog({super.key, required this.identifier, this.onSave});
+
+  @override
+  State<SettingsDialog> createState() => _SettingsDialogState();
+}
+
+class _SettingsDialogState extends State<SettingsDialog> {
+  final controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      titlePadding: EdgeInsets.only(top: 10),
+      title: Padding(
+        padding: EdgeInsets.only(left: 22, top: 8),
+        child: Text(
+          widget.identifier,
+          style: TextStyle(fontSize: 15, color: Colors.black),
+        ),
+      ),
+      content: SizedBox(
+        height: 50,
+        child: TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.blue),
+            ),
+          ),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {},
+          child: Text("CANCEL", style: TextStyle(color: Colors.black)),
+        ),
+        TextButton(
+          onPressed: () {},
+          child: Text("SAVE", style: TextStyle(color: Colors.black)),
+        ),
+      ],
+    );
+  }
+}
