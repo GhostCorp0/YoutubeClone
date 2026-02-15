@@ -26,7 +26,7 @@ class MyChannelScreen extends ConsumerWidget {
                   padding: EdgeInsets.only(top: 20),
                   child: Column(
                     children: [
-                      TopHeader(),
+                      TopHeader(user:currentUser),
                       Text("More about this channel"),
                       Buttons(),
                       //Create tab bar

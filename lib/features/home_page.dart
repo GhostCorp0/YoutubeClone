@@ -3,16 +3,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:youtube_clone/features/account/account_page.dart';
 import 'package:youtube_clone/features/auth/provider/user_provider.dart';
+import 'package:youtube_clone/features/pages_list.dart';
+import 'package:youtube_clone/features/upload/upload_bottom_sheet.dart';
 
 import '../cores/screens/error_page.dart';
 import '../cores/screens/loader.dart';
+import 'content/bottom_navigation.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
+    int currentIndex = 0;
     return Scaffold(
       backgroundColor: Color(0xffFFFFFF),
       body: SafeArea(
@@ -57,10 +67,23 @@ class HomePage extends StatelessWidget {
                         .when(
                           data: (currentUser) => Padding(
                             padding: EdgeInsets.only(right: 12),
-                            child: CircleAvatar(
-                              radius: 14,
-                              backgroundColor: Colors.grey,
-                              backgroundImage:CachedNetworkImageProvider(currentUser.profilePic),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        AccountPage(user: currentUser),
+                                  ),
+                                );
+                              },
+                              child: CircleAvatar(
+                                radius: 14,
+                                backgroundColor: Colors.grey,
+                                backgroundImage: CachedNetworkImageProvider(
+                                  currentUser.profilePic,
+                                ),
+                              ),
                             ),
                           ),
                           error: (error, stackTrace) => const ErrorPage(),
@@ -70,8 +93,22 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
+            Expanded(child: pages[currentIndex]),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigation(
+        onPressed: (int index) {
+          if (index != 2) {
+            currentIndex = index;
+            setState(() {});
+          } else {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => CreateBottomSheet(),
+            );
+          }
+        },
       ),
     );
   }

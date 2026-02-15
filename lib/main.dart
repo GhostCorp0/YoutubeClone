@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:youtube_clone/features/auth/pages/login_page.dart';
 import 'package:youtube_clone/features/auth/pages/username_page.dart';
+import 'package:youtube_clone/features/channel/my_channel/pages/channel_settings.dart';
 import 'package:youtube_clone/features/channel/my_channel/pages/my_channel_screen.dart';
+import 'package:youtube_clone/features/channel/users_channel/pages/user_channel_page.dart';
 import 'package:youtube_clone/features/home_page.dart';
 
 import 'cores/screens/loader.dart';
@@ -51,7 +53,7 @@ class MyApp extends StatelessWidget {
                   email: user.email!,
                 );
               }
-              return MyChannelScreen();
+              return HomePage();
             },
           );
         },
