@@ -19,9 +19,13 @@ class Post extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<UserModel> userModel =
-    ref.watch(anyUserDataProvider(video.userId));
+        ref.watch(anyUserDataProvider(video.userId));
+    final user = userModel.when(
+      data: (u) => u,
+      loading: () => null,
+      error: (_, __) => null,
+    );
 
-    final user = userModel.whenData((user) => user);
     return GestureDetector(
       onTap: () async {
         Navigator.push(
@@ -57,9 +61,12 @@ class Post extends ConsumerWidget {
                   child: CircleAvatar(
                     radius: 20,
                     backgroundColor: Colors.grey,
-                    backgroundImage: CachedNetworkImageProvider(
-                      user.value!.profilePic,
-                    ),
+                    backgroundImage: user?.profilePic != null
+                        ? CachedNetworkImageProvider(user!.profilePic)
+                        : null,
+                    child: user?.profilePic == null
+                        ? const Icon(Icons.person, color: Colors.white)
+                        : null,
                   ),
                 ),
                 Padding(
@@ -86,7 +93,7 @@ class Post extends ConsumerWidget {
               child: Row(
                 children: [
                   Text(
-                    user.value!.displayName,
+                    user?.displayName ?? 'Unknown',
                     style: const TextStyle(
                       color: Colors.blueGrey,
                     ),
