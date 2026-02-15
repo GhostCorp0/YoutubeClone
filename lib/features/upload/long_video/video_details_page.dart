@@ -137,8 +137,8 @@ class _VideoDetailsPageState extends ConsumerState<VideoDetailsPage> {
 
                   //    String videoUrl = await putFileInStorage(widget.video, randomNumber, "video");
 
-                      String thumbnail = 'https://marketplace.canva.com/EAFSv6o6beQ/2/0/1600w/canva-red-bold-finance-youtube-thumbnail-vGSnQGShz3c.jpg';
-                      String videoUrl = 'https://file-examples.com/storage/fede7e70056990cc495661e/2017/04/file_example_MP4_640_3MG.mp4';
+                      String thumbnail = 'https://template.canva.com/EAGxh_bJg0M/1/0/1600w-FxCdkbiDCxI.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH7DHWAQDT%2F20260214%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260214T215830Z&X-Amz-Expires=58901&X-Amz-Signature=e2dd79f90cc3f17ff42edf1b4d9ddb043c769d727f6d41bf7248517c81d7099f&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Sun%2C%2015%20Feb%202026%2014%3A20%3A11%20GMT';
+                      String videoUrl = 'https://www.w3schools.com/tags/mov_bbb.mp4';
 
                       ref.watch(longVideoProvider).uploadVideoToFirestore(
                         videoUrl: videoUrl,
