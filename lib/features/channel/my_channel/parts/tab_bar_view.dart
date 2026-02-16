@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_clone/features/channel/my_channel/pages/home_channel_page.dart';
 
 class TabPages extends StatelessWidget {
   const TabPages({super.key});
@@ -8,7 +9,7 @@ class TabPages extends StatelessWidget {
     return Expanded(
       child: TabBarView(
         children: [
-          Center(child: Text("Home")),
+          HomeChannelPage(),
           Center(child: Text("Videos")),
           Center(child: Text("Shorts")),
           Center(child: Text("Community")),

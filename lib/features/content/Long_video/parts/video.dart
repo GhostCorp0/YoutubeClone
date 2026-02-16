@@ -422,8 +422,6 @@ class _VideoState extends ConsumerState<Video> {
                       final AsyncValue<List<CommentModel>> comments = ref.watch(
                         commentsProvider(widget.video.videoId),
                       );
-
-                      // FIXED: Proper null safety handling
                       return comments.when(
                         data: (commentsList) {
                           if (commentsList.isEmpty) {

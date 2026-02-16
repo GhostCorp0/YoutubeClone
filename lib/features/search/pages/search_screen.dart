@@ -18,27 +18,31 @@ class SearchScreen extends ConsumerStatefulWidget {
 class _SearchScreenState extends ConsumerState<SearchScreen> {
   List foundItems = [];
 
-  filterList(String keywordSelected) async {
-    List result = [];
-    List<UserModel> users = await ref.watch(allChannelsProvider);
-    List<VideoModel> videos = await ref.watch(allVideosProvider);
-    
-    final foundChannels = users.where((user) {
-      return user.displayName.toString().toLowerCase().contains(keywordSelected);
-    }).toList();
+  Future<void> filterList(String keywordSelected) async {
+    final keyword = keywordSelected.trim().toLowerCase();
+    if (keyword.isEmpty) {
+      setState(() => foundItems = []);
+      return;
+    }
 
+    final users = await ref.read(allChannelsProvider);
+    final videos = await ref.read(allVideosProvider);
+
+    final foundChannels = users
+        .where((user) =>
+            user.displayName.toString().toLowerCase().contains(keyword))
+        .toList();
+    final foundVideos = videos
+        .where((video) =>
+            video.title.toString().toLowerCase().contains(keyword))
+        .toList();
+
+    final List<dynamic> result = [];
     result.addAll(foundChannels);
+    result.addAll(foundVideos);
+    result.shuffle();
 
-    final foundVideos = await videos.where((video) {
-      return video.title.toString().toLowerCase().contains(keywordSelected);
-    }).toList();
-
-    result.add(foundVideos);
-
-    setState(() {
-      result.shuffle();
-      foundItems = result;
-    });
+    if (mounted) setState(() => foundItems = result);
   }
 
   @override
@@ -52,10 +56,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
+                  IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back,color: Colors.grey.shade700)),
                   SizedBox(
-                    height: 45,
-                    width: 270,
+                    height: 43,
+                    width: 279,
                     child: TextFormField(
                       onChanged:(value) async {
                         await filterList(value);
@@ -63,14 +67,27 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                       decoration: InputDecoration(
                         hintText: 'Search Youtube...',
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue),
+                          borderRadius:BorderRadius.all(Radius.circular(18)),
+                          borderSide: BorderSide(color: Colors.grey.shade200),
                         ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius:BorderRadius.all(Radius.circular(18)),
+                          borderSide: BorderSide(color: Colors.grey.shade200),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius:BorderRadius.all(Radius.circular(18)),
+                          borderSide: BorderSide(color: Colors.grey.shade200),
+                        ),
+                        filled: true,
+                        fillColor: Color(0xfff2f2f2),
+                        contentPadding: EdgeInsets.only(left:13,bottom: 12),
+                        hintStyle: TextStyle(fontSize: 14,fontWeight:FontWeight.w500)
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 39,
-                    width: 65,
+                    height: 43,
+                    width: 55,
                     child: CustomButton(
                       iconData: Icons.search,
                       onTap: () {},
@@ -79,23 +96,23 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                   ),
                 ],
               ),
-             Expanded(child: ListView.builder(
-               itemCount: foundItems.length,
-               itemBuilder:(context,index){
-                 List<Widget> itemsWidgets = [];
-                 final selectedItem = foundItems[index];
-
-                 if(selectedItem.type == 'video') {
-                   itemsWidgets.add(Post(video:selectedItem));
-                 }else if(selectedItem.type == 'user') {
-                   itemsWidgets.add(const SearchChannelTile());
-                 }else if(foundItems.isEmpty){
-                   return SizedBox();
-                 }
-
-                 return itemsWidgets[0];
-               },
-             ))
+              Expanded(
+                child: foundItems.isEmpty
+                    ? const Center(child: Text('Search for channels or videos'))
+                    : ListView.builder(
+                        itemCount: foundItems.length,
+                        itemBuilder: (context, index) {
+                          final item = foundItems[index];
+                          if (item is VideoModel) {
+                            return Post(video: item);
+                          }
+                          if (item is UserModel) {
+                            return SearchChannelTile(user:item);
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      ),
+              )
             ],
           ),
         ),

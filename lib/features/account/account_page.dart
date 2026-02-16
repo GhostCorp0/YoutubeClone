@@ -23,7 +23,7 @@ class AccountPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 20, top: 10, bottom: 30),
+                  padding: EdgeInsets.only(left: 20, top: 10),
                   child: Row(
                     children: [
                       CircleAvatar(
