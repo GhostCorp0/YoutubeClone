@@ -62,7 +62,6 @@ class _MyChannelSettingsState extends ConsumerState<MyChannelSettings> {
                         ),
                       ],
                     ),
-                    //second part
                     SizedBox(height: 14),
                     SettingsItem(
                       identifier: "Name",

@@ -49,7 +49,6 @@ class _ShortVideoScreenState extends State<ShortVideoScreen> {
           (session) async {
         final ReturnCode? code = await session.getReturnCode();
         if (ReturnCode.isSuccess(code)) {
-          // export video
           isExporting.value = false;
 
           Navigator.push(

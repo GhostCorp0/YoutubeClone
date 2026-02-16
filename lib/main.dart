@@ -48,7 +48,6 @@ class MyApp extends StatelessWidget {
               if (!snapshot.hasData || snapshot.connectionState == ConnectionState.waiting) {
                 return Loader();
               }
-              // New user: no Firestore doc yet → username page. Returning user: doc exists → home.
               if (!snapshot.data!.exists) {
                 return UsernamePage(
                   displayName: user!.displayName!,

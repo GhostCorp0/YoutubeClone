@@ -55,7 +55,6 @@ class _VideoState extends ConsumerState<Video> {
           setState(() {});
         }
       }).catchError((error) {
-        // Handle video initialization error
         debugPrint('Video initialization error: $error');
         if (mounted) {
           setState(() {});
@@ -76,12 +75,10 @@ class _VideoState extends ConsumerState<Video> {
     if (_controller == null) return;
 
     if (_controller!.value.isPlaying) {
-      // pause the video
       _controller!.pause();
       isPlaying = false;
       setState(() {});
     } else {
-      // play the video
       _controller!.play();
       isPlaying = true;
       setState(() {});
@@ -304,7 +301,6 @@ class _VideoState extends ConsumerState<Video> {
                         child: FlatButton(
                           text: "Subscribe",
                           onPressed: () async {
-                            // subscribe channel
                             await ref
                                 .watch(subscribeChannelProvider)
                                 .subscribeChannel(
@@ -394,7 +390,6 @@ class _VideoState extends ConsumerState<Video> {
               ),
             ),
 
-            // comment Box - FIXED: Added null safety check
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               child: GestureDetector(
@@ -447,7 +442,6 @@ class _VideoState extends ConsumerState<Video> {
               ),
             ),
 
-            // FIXED: Removed Expanded widget from ListView
             StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection("videos")

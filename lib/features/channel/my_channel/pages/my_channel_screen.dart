@@ -29,7 +29,6 @@ class MyChannelScreen extends ConsumerWidget {
                       TopHeader(user:currentUser),
                       Text("More about this channel"),
                       Buttons(),
-                      //Create tab bar
                       PageTabBar(),
                       TabPages(),
                     ],

@@ -136,7 +136,6 @@ class _UserChannelPageState extends State<UserChannelPage> {
                     );
               },
             ),
-            // Second Consumer Widget
             Consumer(
               builder: (context, ref, child) {
                 return ref

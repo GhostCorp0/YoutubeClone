@@ -93,7 +93,6 @@ class _UsernamePageState extends ConsumerState<UsernamePage> {
               child: FlatButton(
                 text: "CONTINUE",
                 onPressed: () async{
-                  //add users data inside database
                   isValidate? await ref.read(userDataServiceProvider).addUserDataToFirestore(
                       displayName:widget.displayName,
                       username:usernameController.text,

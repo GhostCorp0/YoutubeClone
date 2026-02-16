@@ -61,54 +61,45 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                Consumer(
-                  builder: (context, ref, child) {
-                    return ref
-                        .watch(currentUserProvider)
-                        .when(
-                          data: (currentUser) => Padding(
-                            padding: EdgeInsets.only(right: 12),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        AccountPage(user: currentUser),
-                                  ),
-                                );
-                              },
-                              child: CircleAvatar(
-                                radius: 14,
-                                backgroundColor: Colors.grey,
-                                backgroundImage: CachedNetworkImageProvider(
-                                  currentUser.profilePic,
-                                ),
-                              ),
-                            ),
-                          ),
-                          error: (error, stackTrace) => const ErrorPage(),
-                          loading: () => Loader(),
-                        );
-                  },
-                ),
               ],
             ),
-            Expanded(child: pages[currentIndex]),
+            Expanded(
+              child: currentIndex == 4
+                  ? Consumer(
+                      builder: (context, ref, _) {
+                        return ref.watch(currentUserProvider).when(
+                              data: (user) => AccountPage(user: user),
+                              loading: () => const Loader(),
+                              error: (_, __) => const ErrorPage(),
+                            );
+                      },
+                    )
+                  : pages[currentIndex],
+            ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigation(
-        selectedIndex: currentIndex,
-        onPressed: (int index) {
-          if (index != 2) {
-            setState(() => currentIndex = index);
-          } else {
-            showModalBottomSheet(
-              context: context,
-              builder: (context) => CreateBottomSheet(),
-            );
-          }
+      bottomNavigationBar: Consumer(
+        builder: (context, ref, _) {
+          final profilePic = ref.watch(currentUserProvider).when(
+                data: (user) => user.profilePic,
+                loading: () => null,
+                error: (_, __) => null,
+              );
+          return BottomNavigation(
+            selectedIndex: currentIndex,
+            profileImageUrl: profilePic,
+            onPressed: (int index) {
+              if (index != 2) {
+                setState(() => currentIndex = index);
+              } else {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) => CreateBottomSheet(),
+                );
+              }
+            },
+          );
         },
       ),
     );

@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:youtube_clone/features/account/items.dart';
 import 'package:youtube_clone/features/auth/model/user_model.dart';
 import 'package:youtube_clone/features/channel/my_channel/pages/my_channel_screen.dart';
@@ -83,14 +85,20 @@ class AccountPage extends StatelessWidget {
                   child: Items(),
                 ),
                 const Spacer(),
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 12),
-                  child: Text(
-                    "Privacy Policy . Terms of Services",
-                    style: TextStyle(
-                      color: Colors.blueGrey,
-                      fontSize: 13.5,
-                      fontWeight: FontWeight.w500,
+                GestureDetector(
+                  onTap:() async{
+                    await GoogleSignIn.instance.signOut();
+                    await FirebaseAuth.instance.signOut();
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(bottom: 12),
+                    child: Text(
+                      "Privacy Policy . Terms of Services",
+                      style: TextStyle(
+                        color: Colors.blueGrey,
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
