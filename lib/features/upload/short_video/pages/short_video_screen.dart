@@ -75,7 +75,7 @@ class _ShortVideoScreenState extends State<ShortVideoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(top: 20),

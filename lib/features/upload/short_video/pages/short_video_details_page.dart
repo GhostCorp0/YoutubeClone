@@ -30,7 +30,7 @@ class _ShortVideoDetailsPageState extends ConsumerState<ShortVideoDetailsPage> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.white,
       ),
       body: SafeArea(
         child: Padding(

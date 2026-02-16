@@ -20,9 +20,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    int currentIndex = 0;
     return Scaffold(
       backgroundColor: Color(0xffFFFFFF),
       body: SafeArea(
@@ -98,10 +99,10 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: BottomNavigation(
+        selectedIndex: currentIndex,
         onPressed: (int index) {
           if (index != 2) {
-            currentIndex = index;
-            setState(() {});
+            setState(() => currentIndex = index);
           } else {
             showModalBottomSheet(
               context: context,

@@ -8,7 +8,7 @@ class LoginPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
           child: Column(

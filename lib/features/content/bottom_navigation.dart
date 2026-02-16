@@ -4,9 +4,12 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 
 class BottomNavigation extends StatefulWidget {
   final Function(int index) onPressed;
+  final int selectedIndex;
+
   const BottomNavigation({
     Key? key,
     required this.onPressed,
+    this.selectedIndex = 0,
   }) : super(key: key);
 
   @override
@@ -14,7 +17,6 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -59,7 +61,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           GButton(icon: Icons.heart_broken, text: "Log out"),
         ],
         onTabChange: widget.onPressed,
-        selectedIndex: currentIndex,
+        selectedIndex: widget.selectedIndex,
       ),
     );
   }
